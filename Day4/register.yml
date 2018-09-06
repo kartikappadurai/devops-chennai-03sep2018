@@ -1,0 +1,22 @@
+#- name: Demonstrates use of register variable
+  - hosts: localhost 
+    tasks:
+      - name: This is a block of code
+        block:
+         - name: List the directory
+           shell: ls -l / 
+           register: output
+
+        rescue:
+         - name: Print the error message 
+           debug: msg="*** Listing directory failed ***"
+
+        always:
+         - debug: var=output 
+           
+      - block:
+           - debug: msg="Second block"
+        rescue:
+           - debug: msg="Executes in case of any error in block tasks"
+        always:
+           - debug: msg="Gets printed always irrespective of block status"

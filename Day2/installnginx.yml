@@ -1,0 +1,25 @@
+- name: Demonstrates installing, configuring and deploying web page in nginx web server
+  hosts: all
+  become: yes
+  vars:
+    - greeting_msg: DevOps 
+    - provisioner_tool: Docker
+    - automation_tool: Ansible
+  tasks:
+    - name: Install nginx web server
+      apt: 
+        name: nginx 
+        state: latest 
+        update_cache: yes
+
+    - name: Configure nginx web root folder
+      copy: src=default dest=/etc/nginx/sites-available/default
+
+    - name: Restart the nginx web server
+      command: service nginx restart
+
+    - name: Create the web root folder
+      file: path=/var/html state=directory mode=0777
+
+    - name: Deploy a web page into nginx web server
+      template: src=index.html.j2 dest=/var/html/index.html

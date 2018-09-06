@@ -1,0 +1,15 @@
+[all]
+ubuntu[1:3]
+centos[1:3]
+
+[dev_servers]
+ubuntu1
+centos1
+
+[qa_servers]
+ubuntu[1:2]
+centos[1:2]
+
+[prod_servers]
+ubuntu3
+centos3
